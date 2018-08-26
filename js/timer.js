@@ -5,7 +5,7 @@ class Timer {
 		this.backgroundColor = '#333';
 		this.color = '#00ff00';
 		this.progressWidth = canvas.width;
-		this.progressHeight = 2;
+		this.progressHeight = 4;
 		this.currentPosition = canvas.width;
 		this.colorRange = 0;
 		this.percent;
@@ -15,16 +15,17 @@ class Timer {
 	Update(balls) {
 		this.Draw();
 		this.currentSeconds -= 0.02;
+
 		// console.log(this.currentSeconds);
 		
-		if (this.currentSeconds < 3) {
+		if (this.currentSeconds < 60) {
 			this.currentFontSize -= 8;
-			if (this.currentFontSize < 0) {
+			if (this.currentFontSize <= 0) {
 				this.currentFontSize = this.initialFontSize;
 			}
 
 		}
-		if (this.currentSeconds < 0) {
+		if (this.currentSeconds <= 0) {
 			for (let i = 0; i < balls.length; i++) {
 				balls[i].UpdateVelocity();
 			}
@@ -60,7 +61,7 @@ class Timer {
 		ctx.restore();
 		ctx.closePath();
 
-		if (this.currentSeconds < 3) {
+		if (this.currentSeconds <= 3) {
 			ctx.beginPath();
 			ctx.save();
 			ctx.font = "20pt Courier New";

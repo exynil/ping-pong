@@ -8,7 +8,7 @@ class Ball {
 		this.speed = speed;
 		this.acceleration = acceleration;
 		this.color = color;
-		this.angle = (Math.random() * 6.28).toFixed(2);
+		this.angle = (Math.random() * Math.PI * 2).toFixed(2);
 		this.velocity = {
 			x: Math.cos(this.angle),
 			y: Math.sin(this.angle)
@@ -16,29 +16,35 @@ class Ball {
 	}
 
 	UpdateVelocity() {
-		this.angle = (Math.random() * 6.28).toFixed(2);
+		this.angle = (Math.random() * Math.PI * 2).toFixed(2);
 		this.velocity.x = Math.cos(this.angle);
 		this.velocity.y = Math.sin(this.angle);
 	}
 
 	Update(balls) {
 		// Проверка на столкновение мяча с левой доской
-		if (this.x - this.radius <= rackets[0].x + rackets[0].width && this.y >= rackets[0].y && this.y <= rackets[0].y + rackets[0].height) {
-			this.velocity.y *= 1;
+		if (this.x - this.radius <= rackets[0].x + rackets[0].width && this.y + this.radius >= rackets[0].y && this.y - this.radius <= rackets[0].y + rackets[0].height) {
 			this.velocity.x *= -1;
+			if (this.x <= rackets[0].x + rackets[0].width) {
+				this.velocity.y *= -1;
+			}
 		}
 
 		// Проверка на столкновение мяча с правой доской
-		if (this.x + this.radius >= rackets[1].x && this.y >= rackets[1].y && this.y <= rackets[1].y + rackets[1].height) {
-			this.velocity.y *= 1;
+		if (this.x + this.radius >= rackets[1].x && this.y + this.radius >= rackets[1].y && this.y - this.radius <= rackets[1].y + rackets[1].height) {
 			this.velocity.x *= -1;
+			if (this.x >= rackets[1].x) {
+				this.velocity.y *= -1;
+			}
 		}
 
 		// Увеличиваем счетчики побед игроков, если противник не смог отразить мяч
 		if (this.x + this.radius <= 0) {
 			rackets[1].numberOfWins++;
+			rackets[1].count++;
 		} else if (this.x - this.radius >= innerWidth) {
 			rackets[0].numberOfWins++;
+			rackets[0].count++;
 		}
 
 		// Удаляем объект если он вышел за левый и правый край

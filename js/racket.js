@@ -10,6 +10,7 @@ class Racket {
 		this.acceleration = acceleration;
 		this.color = color;
 		this.numberOfWins = 0;
+		this.count = 0;
 	}
 
 	Update() {
@@ -17,17 +18,6 @@ class Racket {
 	}
 
 	Draw() {
-		ctx.beginPath();
-		ctx.save();
-		ctx.shadowBlur = 30;
-		ctx.shadowColor = this.color;
-		ctx.strokeStyle = this.color;
-		ctx.setLineDash([10, 10]);
-		ctx.arc(this.x, this.y + this.height / 2, 100, 0, Math.PI * 2, false);
-		ctx.stroke();
-		ctx.restore();
-		ctx.closePath();
-
 		ctx.beginPath();
 		ctx.save();
 		ctx.shadowBlur = 30;

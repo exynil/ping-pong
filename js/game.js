@@ -36,7 +36,7 @@ addEventListener('keydown', function(event) {
 				animationState = false;
 				ctx.beginPath();
 				ctx.save();
-				ctx.fillStyle = 'rgba(0, 0, 0,0.5)';
+				ctx.fillStyle = 'rgba(0, 0, 0, 0.8)';
 				ctx.fillRect(0, 0, canvas.width, canvas.height);
 				ctx.restore();
 				ctx.closePath();
@@ -82,6 +82,12 @@ addEventListener('keydown', function(event) {
 		case 'Numpad3':
 			// Играть против компьютера
 		break;
+		case 'NumpadEnter':
+			let value = 5;
+			value = (value - 0.02).toFixed(3);
+			console.log(value);
+			console.log(value.toFixed(0));
+		break;	
 		default:
 			// console.log(event.code);
 			break;
@@ -229,47 +235,68 @@ function drawBallSpeed() {
 
 function drawInformation() {
 	let interval = 15;
-	let verticalMargin = 15;
+	let marginTop = 15;
+	let marginLeft = 30;
 	ctx.beginPath();
 	ctx.save();
 	ctx.font = "bold 10pt Courier New";
 	ctx.shadowBlur = 5;
 	ctx.shadowColor = 'gray';
 	ctx.fillStyle = 'gray';
-	ctx.fillText('current number of balls: ' + balls.length, 20, interval += verticalMargin);
-	ctx.fillText('total number of balls: ' + (+rackets[0].numberOfWins + +rackets[1].numberOfWins + +balls.length), 20, interval += verticalMargin);
-	ctx.fillText('left racket Y: ' + rackets[0].y.toFixed(2), 20, interval += verticalMargin);
-	ctx.fillText('left racket height: ' + rackets[0].height, 20, interval += verticalMargin);
-	ctx.fillText('right racket Y: ' + rackets[1].y.toFixed(2), 20, interval += verticalMargin);
-	ctx.fillText('right racket height: ' + rackets[1].height, 20, interval += verticalMargin);
+	ctx.fillText('current number of balls: ' + balls.length, marginLeft, interval += marginTop);
+	ctx.fillText('total number of balls: ' + (+rackets[0].numberOfWins + +rackets[1].numberOfWins + +balls.length), marginLeft, interval += marginTop);
+	ctx.fillText('left racket Y: ' + rackets[0].y.toFixed(2), marginLeft, interval += marginTop);
+	ctx.fillText('left racket height: ' + rackets[0].height, marginLeft, interval += marginTop);
+	ctx.fillText('right racket Y: ' + rackets[1].y.toFixed(2), marginLeft, interval += marginTop);
+	ctx.fillText('right racket height: ' + rackets[1].height, marginLeft, interval += marginTop);
 	if (balls[0] != undefined) {
-		ctx.fillText('balls[0].x: ' + balls[0].x.toFixed(2), 20, interval += verticalMargin);
-		ctx.fillText('balls[0].y: ' + balls[0].y.toFixed(2), 20, interval += verticalMargin);
-		ctx.fillText('balls[0].vx: ' + balls[0].velocity.x.toFixed(2), 20, interval += verticalMargin);
-		ctx.fillText('balls[0].vy: ' + balls[0].velocity.y.toFixed(2), 20, interval += verticalMargin);
-		ctx.fillText('balls[0].angle: ' + balls[0].angle + ' (' + (balls[0].angle * 360 / 6.28).toFixed(2) + '°)', 20, interval += verticalMargin);
-		ctx.fillText('balls[0].speed: ' + balls[0].speed.toFixed(2), 20, interval += verticalMargin);
-		ctx.fillText('balls[0].acceleration: ' + balls[0].acceleration, 20, interval += verticalMargin);
-		ctx.fillText('balls[0].mass: ' + balls[0].mass, 20, interval += verticalMargin);
-		ctx.fillText('balls[0].color: ' + balls[0].color, 20, interval += verticalMargin);
+		ctx.fillText('balls[0].x: ' + balls[0].x.toFixed(2), marginLeft, interval += marginTop);
+		ctx.fillText('balls[0].y: ' + balls[0].y.toFixed(2), marginLeft, interval += marginTop);
+		ctx.fillText('balls[0].vx: ' + balls[0].velocity.x.toFixed(2), marginLeft, interval += marginTop);
+		ctx.fillText('balls[0].vy: ' + balls[0].velocity.y.toFixed(2), marginLeft, interval += marginTop);
+		ctx.fillText('balls[0].angle: ' + balls[0].angle + ' (' + (balls[0].angle * 360 / 6.28).toFixed(2) + '°)', marginLeft, interval += marginTop);
+		ctx.fillText('balls[0].speed: ' + balls[0].speed.toFixed(2), marginLeft, interval += marginTop);
+		ctx.fillText('balls[0].acceleration: ' + balls[0].acceleration, marginLeft, interval += marginTop);
+		ctx.fillText('balls[0].mass: ' + balls[0].mass, marginLeft, interval += marginTop);
+		ctx.fillText('balls[0].color: ' + balls[0].color, marginLeft, interval += marginTop);
 
 	}
-	ctx.fillText('timer initial seconds: ' + timer.initialSeconds, 20, interval += verticalMargin);
-	ctx.fillText('timer current seconds: ' + timer.currentSeconds.toFixed(2), 20, interval += verticalMargin);
-	ctx.fillText('timer color: ' + timer.color, 20, interval += verticalMargin);
-	ctx.fillText('timer progressWidth: ' + timer.progressWidth.toFixed(2), 20, interval += verticalMargin);
-	ctx.fillText('timer currentPosition: ' + timer.currentPosition.toFixed(2), 20, interval += verticalMargin);
+	ctx.fillText('timer initial seconds: ' + timer.initialSeconds, marginLeft, interval += marginTop);
+	ctx.fillText('timer current seconds: ' + timer.currentSeconds.toFixed(2), marginLeft, interval += marginTop);
+	ctx.fillText('timer color: ' + timer.color, marginLeft, interval += marginTop);
+	ctx.fillText('timer progressWidth: ' + timer.progressWidth.toFixed(2), marginLeft, interval += marginTop);
+	ctx.fillText('timer currentPosition: ' + timer.currentPosition.toFixed(2), marginLeft, interval += marginTop);
 	ctx.restore();
 	ctx.closePath();
 	if (balls[0] != undefined) {
 		ctx.beginPath();
 		ctx.save();
+		ctx.setLineDash([5, 10]);
+		// Вертикальная линия по центру
 		ctx.moveTo(balls[0].x, 0);
 		ctx.lineTo(balls[0].x, canvas.height);
+		// Горизонтальная линия по центру
 		ctx.moveTo(0, balls[0].y);
 		ctx.lineTo(canvas.width, balls[0].y);
-		ctx.setLineDash([5, 5]);
-		ctx.strokeStyle = 'gray';
+		ctx.strokeStyle = 'grey';
+		ctx.stroke();
+		ctx.restore();
+		ctx.closePath();
+		ctx.beginPath();
+		ctx.save();
+		// Вертикальная линия слева
+		ctx.moveTo(balls[0].x - balls[0].radius, 0);
+		ctx.lineTo(balls[0].x - balls[0].radius, canvas.height);
+		// Вертикальная линия справа
+		ctx.moveTo(balls[0].x + balls[0].radius, 0);
+		ctx.lineTo(balls[0].x + balls[0].radius, canvas.height);
+		// Горизонтальная линия снизу
+		ctx.moveTo(0, balls[0].y + balls[0].radius);
+		ctx.lineTo(canvas.width, balls[0].y + balls[0].radius);
+		// Горизонтальная линия сверху
+		ctx.moveTo(0, balls[0].y - balls[0].radius);
+		ctx.lineTo(canvas.width, balls[0].y - balls[0].radius);
+		ctx.strokeStyle = '#F50338';
 		ctx.stroke();
 		ctx.restore();
 		ctx.closePath();
@@ -311,6 +338,7 @@ function pushBalls(numberOfBalls) {
 			let mass = 1;
 			let speed = 5;
 			let acceleration = 0.01;
+
 			let x = randomIntFromRange(canvas.width / 2 - 40, canvas.width / 2 + 40);
 			let y = randomIntFromRange(radius, canvas.height - radius);
 
@@ -326,7 +354,7 @@ function pushBalls(numberOfBalls) {
 			balls.push(new Ball(i, x, y, radius, mass, speed, acceleration, color));
 		}
 
-		// balls.push(new Ball(0, canvas.width / 2, canvas.height / 2, 15, 1, 8, 0.1, 'lightgreen'));
+		// balls.push(new Ball(0, canvas.width - 11, 20, 15, 1, 3, 0, 'lightgreen'));
 		// balls[0].velocity.x = 0;
 		// balls[0].velocity.y = 1;
 	}
@@ -348,9 +376,25 @@ function animate() {
 		balls[i].Update(balls);
 	}
 
+	if (balls[0].x < canvas.width / 2) {
+		rackets[0].y = balls[0].y - rackets[1].height / 2;
+		if (rackets[0].y < 0) {
+			rackets[0].y = 0;
+		} else if (rackets[0].y + rackets[0].height > canvas.height) {
+			rackets[0].y = canvas.height - rackets[0].height;
+		}
+	} else {
+		rackets[1].y = balls[0].y - rackets[1].height / 2;
+		if (rackets[1].y < 0) {
+			rackets[1].y = 0;
+		} else if (rackets[0].y + rackets[1].height > canvas.height) {
+			rackets[1].y = canvas.height - rackets[1].height;
+		}
+	}
+
 	drawResult();
 	drawLineBetweenBoardAndBall();
-	drawLinesBetweenBalls();
+	// drawLinesBetweenBalls();
 	if (balls.length == 1) {
 		drawBallSpeed();
 	}
