@@ -135,34 +135,44 @@ class Ball {
 
 		let lastX = this.x;
 		let lastY = this.y;
+		let length;
 
 		do {
 			// Вниз и вправо
 			if (velocity.x >= 0 && velocity.y >= 0) {
 				y = canvas.height - this.radius;
-				x = lastX - Math.tan(Math.PI + Math.PI / 2 + angle) * (canvas.height - lastY - this.radius);
-
+				length = Math.tan(Math.PI + Math.PI / 2 + angle);
+				x = lastX - length * (canvas.height - lastY);
 				velocity.y *= -1;
+
+				this.DrawValue(Math.PI + Math.PI / 2 + angle);
 			}
 			// Вниз и влево
 			else if (velocity.x <= 0 && velocity.y >= 0) {
 				y = canvas.height - this.radius;
-				x = lastX - Math.tan(Math.PI + Math.PI / 2 - angle) * (canvas.height - lastY - this.radius);
+				length = Math.tan(Math.PI + Math.PI / 2 - angle);
+				x = lastX - length * (canvas.height - lastY);
 				velocity.y *= -1;
+
+				this.DrawValue(Math.PI + Math.PI / 2 - angle);
 			}
 			// Вверх и влево
 			else if (velocity.x <= 0 && velocity.y <= 0) {
 				y = this.radius;
-				x = lastX - Math.tan(Math.PI / 2 - angle) * (lastY - this.radius);
-
+				length = Math.tan(Math.PI / 2 - angle);
+				x = lastX - length * (lastY);
 				velocity.y *= -1;
+
+				this.DrawValue(Math.PI / 2 - angle);
 			}
 			// Вверх и вправо
 			else if (velocity.x >= 0 && velocity.y <= 0) {
 				y = this.radius;
-				x = lastX + Math.tan(Math.PI / 2 - angle) * (lastY - this.radius);
-
+				length = Math.tan(Math.PI / 2 - angle);
+				x = lastX + length * (lastY);
 				velocity.y *= -1;
+
+				this.DrawValue(Math.PI / 2 - angle);
 			}
 
 			lastX = x;
@@ -178,12 +188,26 @@ class Ball {
 		ctx.beginPath();
 		ctx.save();
 		ctx.strokeStyle = this.color;
-		ctx.setLineDash([15, 15]);
+		ctx.lineWidth = 1;
 		ctx.moveTo(this.x, this.y);
 		for (let i = 0; i < coordinates.length; i++) {
 			ctx.lineTo(coordinates[i].x, coordinates[i].y);
 		}
 		ctx.stroke();
+		ctx.restore();
+		ctx.closePath();
+
+		
+	}
+
+	DrawValue(value) {
+		ctx.beginPath();
+		ctx.save();
+		ctx.font = "bold 10pt Courier New";
+		ctx.shadowBlur = 5;
+		ctx.shadowColor = '#8A8962';
+		ctx.fillStyle = '#8A8962';
+		ctx.fillText(value.toFixed(2), canvas.width - 100, 50);
 		ctx.restore();
 		ctx.closePath();
 	}

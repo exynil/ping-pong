@@ -268,6 +268,8 @@ function drawDeveloperMode() {
 	ctx.fillText('timer color: ' + timer.color, marginLeft, interval += marginTop);
 	ctx.fillText('timer progressWidth: ' + timer.progressWidth.toFixed(2), marginLeft, interval += marginTop);
 	ctx.fillText('timer currentPosition: ' + timer.currentPosition.toFixed(2), marginLeft, interval += marginTop);
+	ctx.fillText('canvas width: ' + canvas.width, marginLeft, interval += marginTop);
+	ctx.fillText('canvas height: ' + canvas.height, marginLeft, interval += marginTop);
 	ctx.restore();
 	ctx.closePath();
 	if (balls[0] != undefined) {
@@ -362,7 +364,7 @@ function pushBalls(numberOfBalls) {
 			let radius = 15;
 			let color = randomColor();
 			let mass = 1;
-			let speed = 5; // 5
+			let speed = 10; // 5
 			let acceleration = 0; // 0.01
 
 			let x = randomIntFromRange(canvas.width / 2 - 40, canvas.width / 2 + 40);
