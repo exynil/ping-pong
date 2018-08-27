@@ -125,75 +125,60 @@ class Ball {
 		this.DrawTrajectory();
 	}
 
-	DrawTrajectory () {
+	DrawTrajectory() {
 		// Прорисовка траетории
 		let angle = this.angle;;
 
-		let coordinates = [];
-		coordinates.push(new Point(this.x, this.y));
-		let velocityX = this.velocity.x;
-		let velocityY = this.velocity.y;
-		let id = 0;
+		let coordinates = [new Point(this.x, this.y)];
+		let velocity = new Point(this.velocity.x, this.velocity.y);
 		let x, y;
 
-		let thisX = this.x;
-		let thisY = this.y;
+		let lastX = this.x;
+		let lastY = this.y;
 
 		do {
 			// Вниз и вправо
-			if (velocityX >= 0 && velocityY >= 0) {
+			if (velocity.x >= 0 && velocity.y >= 0) {
 				y = canvas.height - this.radius;
-				x = thisX - Math.tan(Math.PI + Math.PI / 2 + angle) * (canvas.height - thisY - this.radius);
-				
-				velocityY *= -1;
-				// console.log('1');
+				x = lastX - Math.tan(Math.PI + Math.PI / 2 + angle) * (canvas.height - lastY - this.radius);
+
+				velocity.y *= -1;
 			}
 			// Вниз и влево
-			else if (velocityX <= 0 && velocityY >= 0) {
-				if (angle > Math.PI) {
-					angle = Math.PI + angle;
-				}
-				
+			else if (velocity.x <= 0 && velocity.y >= 0) {
 				y = canvas.height - this.radius;
-				x = thisX - Math.tan(Math.PI + Math.PI / 2 - angle) * (canvas.height - thisY - this.radius);
-				velocityY *= -1;
-				// console.log('2');
+				x = lastX - Math.tan(Math.PI + Math.PI / 2 - angle) * (canvas.height - lastY - this.radius);
+				velocity.y *= -1;
 			}
 			// Вверх и влево
-			else if (velocityX <= 0 && velocityY <= 0) {
-
+			else if (velocity.x <= 0 && velocity.y <= 0) {
 				y = this.radius;
-				x = thisX - Math.tan(Math.PI / 2 - angle) * (thisY - this.radius);
+				x = lastX - Math.tan(Math.PI / 2 - angle) * (lastY - this.radius);
 
-				velocityY *= -1;
-				// console.log('3');
+				velocity.y *= -1;
 			}
 			// Вверх и вправо
-			else if (velocityX >= 0 && velocityY <= 0) {
-				if (angle > Math.PI) {
-					angle = Math.PI - angle;
-				}
+			else if (velocity.x >= 0 && velocity.y <= 0) {
 				y = this.radius;
-				x = thisX + Math.tan(Math.PI / 2 - angle) * (thisY - this.radius);
+				x = lastX + Math.tan(Math.PI / 2 - angle) * (lastY - this.radius);
 
-				velocityY *= -1;
-				// console.log('4');
+				velocity.y *= -1;
 			}
 
-			thisX = x;
-			thisY = y;
+			lastX = x;
+			lastY = y;
 
-			
+
 			coordinates.push(new Point(x, y));
 
-		} while (thisX > 0 && thisX < canvas.width);
+		} while (lastX > 0 && lastX < canvas.width);
 
 
-		
+
 		ctx.beginPath();
 		ctx.save();
 		ctx.strokeStyle = this.color;
-		ctx.setLineDash([5, 10]);
+		ctx.setLineDash([15, 15]);
 		ctx.moveTo(this.x, this.y);
 		for (let i = 0; i < coordinates.length; i++) {
 			ctx.lineTo(coordinates[i].x, coordinates[i].y);

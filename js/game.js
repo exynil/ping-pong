@@ -15,7 +15,7 @@ var animationState = true;
 var limitation = 5;
 var developerMode = true;
 var timer;
-var autocontrol = false;
+var autocontrol = true;
 
 canvas.width = innerWidth;
 canvas.height = innerHeight;
@@ -243,8 +243,8 @@ function drawDeveloperMode() {
 	ctx.save();
 	ctx.font = "bold 10pt Courier New";
 	ctx.shadowBlur = 5;
-	ctx.shadowColor = 'gray';
-	ctx.fillStyle = 'gray';
+	ctx.shadowColor = '#8A8962';
+	ctx.fillStyle = '#8A8962';
 	ctx.fillText('current number of balls: ' + balls.length, marginLeft, interval += 50);
 	ctx.fillText('total number of balls: ' + (+rackets[0].numberOfWins + +rackets[1].numberOfWins + +balls.length), marginLeft, interval += marginTop);
 	ctx.fillText('left racket Y: ' + rackets[0].y.toFixed(2), marginLeft, interval += marginTop);
@@ -280,7 +280,7 @@ function drawDeveloperMode() {
 		// Горизонтальная линия по центру
 		ctx.moveTo(0, balls[0].y);
 		ctx.lineTo(canvas.width, balls[0].y);
-		ctx.strokeStyle = 'grey';
+		ctx.strokeStyle = 'gray';
 		ctx.stroke();
 		ctx.restore();
 		ctx.closePath();
@@ -309,8 +309,8 @@ function drawDeveloperMode() {
 		ctx.save();
 		ctx.font = "bold 10pt Courier New";
 		ctx.shadowBlur = 5;
-		ctx.shadowColor = 'gray';
-		ctx.fillStyle = 'gray';
+		ctx.shadowColor = '#8A8962';
+		ctx.fillStyle = '#8A8962';
 		ctx.fillText(i, i, 20);
 		ctx.restore();
 		ctx.closePath();
@@ -321,8 +321,8 @@ function drawDeveloperMode() {
 		ctx.save();
 		ctx.font = "bold 10pt Courier New";
 		ctx.shadowBlur = 5;
-		ctx.shadowColor = 'gray';
-		ctx.fillStyle = 'gray';
+		ctx.shadowColor = '#8A8962';
+		ctx.fillStyle = '#8A8962';
 		ctx.fillText(i, 0, i);
 		ctx.restore();
 		ctx.closePath();
@@ -362,7 +362,7 @@ function pushBalls(numberOfBalls) {
 			let radius = 15;
 			let color = randomColor();
 			let mass = 1;
-			let speed = 2; // 5
+			let speed = 5; // 5
 			let acceleration = 0; // 0.01
 
 			let x = randomIntFromRange(canvas.width / 2 - 40, canvas.width / 2 + 40);
@@ -551,11 +551,3 @@ function resolveCollision(Ball, otherBall) {
 		otherBall.velocity.y = vFinal2.y;
 	}
 }
-
-// vx = -0.121231
-// vy = -0.992624
-// angle = 1.69
-// let y = 200 - this.radius;
-// let x = thisX - Math.tan(Math.PI + Math.PI / 2 - 1.69) * (200 - thisY - this.radius);
-// console.log(y);
-// console.log(x);
