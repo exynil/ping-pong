@@ -52,6 +52,13 @@ addEventListener('keydown', function(event) {
 				developerMode = true;
 			}
 			break;
+		case 'KeyH':
+			if (hotKeys) {
+				hotKeys = false;
+			} else {
+				hotKeys = true;
+			}
+			break;
 		case 'KeyC':
 			for (let i = 0; i < balls.length; i++) {
 				// balls[i].color = randomColor();

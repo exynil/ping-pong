@@ -16,6 +16,7 @@ var limitation = 5;
 var developerMode = false;
 var timer;
 var autocontrol = false;
+var hotKeys = false;
 
 canvas.width = innerWidth;
 canvas.height = innerHeight;
@@ -104,6 +105,34 @@ function drawLinesBetweenBalls() {
 }
 
 // Прорисовка максимальной скорости
+function drawHotKeys() {
+	let interval = 0;
+	let marginTop = 15;
+	let marginRight = 300;
+	ctx.beginPath();
+	ctx.save();
+	ctx.font = "bold 10pt Courier New";
+	ctx.shadowBlur = 15;
+	ctx.shadowColor = '#8A8962';
+	ctx.fillStyle = '#8A8962';
+	if (hotKeys) {
+		ctx.fillText('W, S: Игрок 1', canvas.width - marginRight, interval += 50);
+		ctx.fillText('ArrowUp, ArrowDown: Игрок 2', canvas.width - marginRight, interval += marginTop);
+		ctx.fillText('Space: Пауза', canvas.width - marginRight, interval += marginTop);
+		ctx.fillText('M: Режим разработчика', canvas.width - marginRight, interval += marginTop);
+		ctx.fillText('R: Изменить вектор движения', canvas.width - marginRight, interval += marginTop);
+		ctx.fillText('NumpadAdd: Добавить мяч', canvas.width - marginRight, interval += marginTop);
+		ctx.fillText('Numpad3: Компьютер против компьютера', canvas.width - marginRight, interval += marginTop);
+	} else {
+		ctx.fillText('Горячие клавиши - H', canvas.width - marginRight, interval += 50);
+	}
+	
+	ctx.restore();
+	ctx.closePath();
+}
+
+
+// Прорисовка максимальной скорости
 function drawMaxSpeed() {
 	ctx.beginPath();
 	ctx.save();
@@ -118,6 +147,9 @@ function drawMaxSpeed() {
 
 // Прорисовка скорости мяча
 function drawBallSpeed() {
+	let interval = 0;
+	let marginTop = 15;
+	let marginRight = 50;
 	ctx.beginPath();
 	ctx.save();
 	ctx.font = "30pt Courier New";
@@ -362,7 +394,7 @@ function animate() {
 	if (developerMode) {
 		drawDeveloperMode()
 	}
-
+	drawHotKeys();
 	
 	timer.Update(balls);
 }
