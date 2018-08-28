@@ -364,8 +364,8 @@ function pushBalls(numberOfBalls) {
 			let radius = 15;
 			let color = randomColor();
 			let mass = 1;
-			let speed = 2; // 5
-			let acceleration = 0; // 0.01
+			let speed = 5; // 5
+			let acceleration = 0.01; // 0.01
 
 			let x = randomIntFromRange(canvas.width / 2 - 40, canvas.width / 2 + 40);
 			let y = randomIntFromRange(radius, canvas.height - radius);
