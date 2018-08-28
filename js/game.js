@@ -318,7 +318,7 @@ function animate() {
 		}
 	}
 
-	if (balls.length <= 1) {
+	if (balls.length <= 0) {
 		pushBalls(numberOfBalls);
 	}
 
