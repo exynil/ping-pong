@@ -13,7 +13,7 @@ var maxSpeed = 0;
 var animationId;
 var animationState = true;
 var limitation = 5;
-var developerMode = true;
+var developerMode = false;
 var timer;
 var autocontrol = false;
 
