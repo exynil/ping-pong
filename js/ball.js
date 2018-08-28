@@ -103,8 +103,8 @@ class Ball {
 		// Прорисовка внутреннего круга мяча
 		ctx.beginPath();
 		ctx.save();
-		// ctx.shadowBlur = 30;
-		// ctx.shadowColor = this.color;
+		ctx.shadowBlur = 30;
+		ctx.shadowColor = this.color;
 		ctx.fillStyle = this.color;
 		ctx.arc(this.x, this.y, this.radius - this.radius / 2, Math.PI * 2, false);
 		ctx.fill();
@@ -114,25 +114,21 @@ class Ball {
 		// Прорисовка внешнего круга мяча
 		ctx.beginPath();
 		ctx.save();
-		// ctx.shadowBlur = 30;
-		// ctx.shadowColor = this.color;
+		ctx.shadowBlur = 30;
+		ctx.shadowColor = this.color;
 		ctx.fillStyle = this.color;
 		ctx.arc(this.x, this.y, this.radius, Math.PI * 2, false);
 		ctx.arc(this.x, this.y, this.radius - this.radius / 4, Math.PI * 2, false);
 		ctx.fill('evenodd');
 		ctx.restore();
 		ctx.closePath();
-		this.DrawTrajectory();
 	}
 
+	// Прорисовка траетории движения мяча
 	DrawTrajectory() {
-		// Прорисовка траетории
-		let angle = this.angle;;
-
 		let coordinates = [new Point(this.x, this.y)];
 		let velocity = new Point(this.velocity.x, this.velocity.y);
 		let x, y;
-
 		let thisX = this.x;
 		let thisY = this.y;
 		let length;
@@ -140,16 +136,16 @@ class Ball {
 		do {
 
 			if (velocity.x <= 0) {
-				if (angle > Math.PI) {
-					length = Math.tan(Math.PI / 2 - angle);
+				if (this.angle > Math.PI) {
+					length = Math.tan(Math.PI / 2 - this.angle);
 				} else {
-					length = Math.tan(Math.PI / 2 + angle);
+					length = Math.tan(Math.PI / 2 + this.angle);
 				}
 			} else {
-				if (angle < Math.PI) {
-					length = Math.tan(Math.PI / 2 - angle);
+				if (this.angle < Math.PI) {
+					length = Math.tan(Math.PI / 2 - this.angle);
 				} else {
-					length = Math.tan(Math.PI / 2 + angle);
+					length = Math.tan(Math.PI / 2 + this.angle);
 				}
 			}
 			
@@ -208,17 +204,5 @@ class Ball {
 		ctx.closePath();
 
 		
-	}
-
-	DrawValue(value) {
-		ctx.beginPath();
-		ctx.save();
-		ctx.font = "bold 10pt Courier New";
-		ctx.shadowBlur = 5;
-		ctx.shadowColor = '#8A8962';
-		ctx.fillStyle = '#8A8962';
-		ctx.fillText(value.toFixed(2), canvas.width - 100, 50);
-		ctx.restore();
-		ctx.closePath();
 	}
 }
