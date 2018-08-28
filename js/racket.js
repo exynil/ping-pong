@@ -10,7 +10,6 @@ class Racket {
 		this.acceleration = acceleration;
 		this.color = color;
 		this.numberOfWins = 0;
-		this.count = 0;
 	}
 
 	Update() {

@@ -49,10 +49,8 @@ class Ball {
 		// Увеличиваем счетчики побед игроков, если противник не смог отразить мяч
 		if (this.x + this.radius <= 0) {
 			rackets[1].numberOfWins++;
-			rackets[1].count++;
 		} else if (this.x - this.radius >= innerWidth) {
 			rackets[0].numberOfWins++;
-			rackets[0].count++;
 		}
 
 		// Удаляем объект если он вышел за левый и правый край
@@ -141,6 +139,7 @@ class Ball {
 				} else {
 					length = Math.tan(Math.PI / 2 + this.angle);
 				}
+				
 			} else {
 				if (this.angle < Math.PI) {
 					length = Math.tan(Math.PI / 2 - this.angle);
@@ -194,7 +193,6 @@ class Ball {
 		ctx.beginPath();
 		ctx.save();
 		ctx.strokeStyle = this.color;
-		// ctx.lineWidth = 1;
 		ctx.moveTo(this.x, this.y);
 		for (let i = 0; i < coordinates.length; i++) {
 			ctx.lineTo(coordinates[i].x, coordinates[i].y);

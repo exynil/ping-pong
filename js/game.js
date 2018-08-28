@@ -279,7 +279,7 @@ function pushBalls(numberOfBalls) {
 			balls.push(new Ball(i, x, y, radius, mass, speed, acceleration, color));
 		}
 
-		// balls.push(new Ball(0, 500, 500, 15, 1, 2, 0, 'springgreen'));
+		// balls.push(new Ball(0, canvas.width - 50, 50, 15, 1, 2, 0, 'springgreen'));
 		// balls[0].velocity.x = -0.98;
 		// balls[0].velocity.y = 0.19;
 		// balls[0].angle = 0.19;
@@ -318,7 +318,7 @@ function animate() {
 		}
 	}
 
-	if (balls.length <= 0) {
+	if (balls.length <= 1) {
 		pushBalls(numberOfBalls);
 	}
 
@@ -328,7 +328,7 @@ function animate() {
 
 	for (let i = 0; i < balls.length; i++) {
 		balls[i].Update(balls);
-		if (developerMode) {
+		if (developerMode && balls[i] != undefined) {
 			balls[i].DrawTrajectory();
 		}
 	}
@@ -353,7 +353,7 @@ function animate() {
 
 	drawResult();
 	// drawLineBetweenBoardAndBall();
-	// drawLinesBetweenBalls();
+	drawLinesBetweenBalls();
 	if (balls.length == 1) {
 		drawBallSpeed();
 	}

@@ -15,7 +15,7 @@ addEventListener('keydown', function(event) {
 				animationState = false;
 				ctx.beginPath();
 				ctx.save();
-				ctx.fillStyle = 'rgba(0, 0, 0, 0.3)';
+				ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
 				ctx.fillRect(0, 0, canvas.width, canvas.height);
 				ctx.restore();
 				ctx.closePath();
