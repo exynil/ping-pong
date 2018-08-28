@@ -15,7 +15,7 @@ var animationState = true;
 var limitation = 5;
 var developerMode = true;
 var timer;
-var autocontrol = true;
+var autocontrol = false;
 
 canvas.width = innerWidth;
 canvas.height = innerHeight;
@@ -254,9 +254,9 @@ function drawDeveloperMode() {
 	if (balls[0] != undefined) {
 		ctx.fillText('balls[0].x: ' + balls[0].x.toFixed(2), marginLeft, interval += marginTop);
 		ctx.fillText('balls[0].y: ' + balls[0].y.toFixed(2), marginLeft, interval += marginTop);
-		ctx.fillText('balls[0].vx: ' + balls[0].velocity.x, marginLeft, interval += marginTop);
-		ctx.fillText('balls[0].vy: ' + balls[0].velocity.y, marginLeft, interval += marginTop);
-		ctx.fillText('balls[0].angle: ' + balls[0].angle + ' (' + (balls[0].angle * 360 / 6.28).toFixed(2) + '°)', marginLeft, interval += marginTop);
+		ctx.fillText('balls[0].vx: ' + balls[0].velocity.x.toFixed(2), marginLeft, interval += marginTop);
+		ctx.fillText('balls[0].vy: ' + balls[0].velocity.y.toFixed(2), marginLeft, interval += marginTop);
+		ctx.fillText('balls[0].angle: ' + balls[0].angle.toFixed(2) + ' (' + (balls[0].angle * 360 / 6.28).toFixed(2) + '°)', marginLeft, interval += marginTop);
 		ctx.fillText('balls[0].speed: ' + balls[0].speed.toFixed(2), marginLeft, interval += marginTop);
 		ctx.fillText('balls[0].acceleration: ' + balls[0].acceleration, marginLeft, interval += marginTop);
 		ctx.fillText('balls[0].mass: ' + balls[0].mass, marginLeft, interval += marginTop);
@@ -364,7 +364,7 @@ function pushBalls(numberOfBalls) {
 			let radius = 15;
 			let color = randomColor();
 			let mass = 1;
-			let speed = 10; // 5
+			let speed = 2; // 5
 			let acceleration = 0; // 0.01
 
 			let x = randomIntFromRange(canvas.width / 2 - 40, canvas.width / 2 + 40);
@@ -382,10 +382,10 @@ function pushBalls(numberOfBalls) {
 			balls.push(new Ball(i, x, y, radius, mass, speed, acceleration, color));
 		}
 
-		// balls.push(new Ball(0, 0, canvas.height - 100, 15, 1, 2, 0, 'springgreen'));
-		// balls[0].velocity.x = 0.8112357;
-		// balls[0].velocity.y = -0.584719;
-		// balls[0].angle = 5.658651;
+		// balls.push(new Ball(0, 500, 500, 15, 1, 2, 0, 'springgreen'));
+		// balls[0].velocity.x = 0.12;
+		// balls[0].velocity.y = 0.99;
+		// balls[0].angle = 4.83;
 	}
 }
 

@@ -133,62 +133,72 @@ class Ball {
 		let velocity = new Point(this.velocity.x, this.velocity.y);
 		let x, y;
 
-		let lastX = this.x;
-		let lastY = this.y;
+		let thisX = this.x;
+		let thisY = this.y;
 		let length;
 
 		do {
+
+			if (velocity.x <= 0) {
+				if (angle > Math.PI) {
+					length = Math.tan(Math.PI / 2 - angle);
+				} else {
+					length = Math.tan(Math.PI / 2 + angle);
+				}
+			} else {
+				if (angle < Math.PI) {
+					length = Math.tan(Math.PI / 2 - angle);
+				} else {
+					length = Math.tan(Math.PI / 2 + angle);
+				}
+			}
+			
+
 			// Вниз и вправо
 			if (velocity.x >= 0 && velocity.y >= 0) {
 				y = canvas.height - this.radius;
-				length = Math.tan(Math.PI + Math.PI / 2 + angle);
-				x = lastX - length * (canvas.height - lastY);
-				velocity.y *= -1;
 
-				this.DrawValue(Math.PI + Math.PI / 2 + angle);
+				x = thisX + length * (canvas.height - thisY - this.radius);
+				velocity.y *= -1;
 			}
 			// Вниз и влево
 			else if (velocity.x <= 0 && velocity.y >= 0) {
 				y = canvas.height - this.radius;
-				length = Math.tan(Math.PI + Math.PI / 2 - angle);
-				x = lastX - length * (canvas.height - lastY);
-				velocity.y *= -1;
 
-				this.DrawValue(Math.PI + Math.PI / 2 - angle);
+				x = thisX - length * (canvas.height - thisY - this.radius);
+				velocity.y *= -1;
 			}
 			// Вверх и влево
 			else if (velocity.x <= 0 && velocity.y <= 0) {
 				y = this.radius;
-				length = Math.tan(Math.PI / 2 - angle);
-				x = lastX - length * (lastY);
+				
+				x = thisX - length * (thisY - this.radius);
+				
 				velocity.y *= -1;
-
-				this.DrawValue(Math.PI / 2 - angle);
 			}
 			// Вверх и вправо
 			else if (velocity.x >= 0 && velocity.y <= 0) {
 				y = this.radius;
-				length = Math.tan(Math.PI / 2 - angle);
-				x = lastX + length * (lastY);
+				
+				x = thisX + length * (thisY - this.radius);
+				
 				velocity.y *= -1;
-
-				this.DrawValue(Math.PI / 2 - angle);
 			}
 
-			lastX = x;
-			lastY = y;
+			thisX = x;
+			thisY = y;
 
 
 			coordinates.push(new Point(x, y));
 
-		} while (lastX > 0 && lastX < canvas.width);
+		} while (thisX > 0 && thisX < canvas.width);
 
 
 
 		ctx.beginPath();
 		ctx.save();
 		ctx.strokeStyle = this.color;
-		ctx.lineWidth = 1;
+		// ctx.lineWidth = 1;
 		ctx.moveTo(this.x, this.y);
 		for (let i = 0; i < coordinates.length; i++) {
 			ctx.lineTo(coordinates[i].x, coordinates[i].y);
